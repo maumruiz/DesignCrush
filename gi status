@@ -1,0 +1,99 @@
+[33mcommit c109c7ae6611755a9cbf6ca3d6fe095532402a21[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sun Nov 15 21:01:20 2015 -0600
+
+    Todas las funciones principales de los casos de uso
+    
+    deleteItemFromCart
+    BuyCart
+    uploadDesign
+    commentDesign
+    getCommentsOfDesign
+
+[33mcommit 07e9ecfee2606e22578d0ac3cf915d02f8b10a31[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sun Nov 15 01:18:39 2015 -0600
+
+    Funciones getDesigns, getCompleteDesign, addItemsToCart
+    
+    getDesigns sirve para conseguir los diseños mas nuevos (homepage), los 5
+    más vistos de la semana (carousel), getCompleteDesign sirve para
+    conseguir la información para entrar a la página del diseño y
+    addItemsToCart necesita los datos del diseño, producto, etc desde el
+    frontend
+
+[33mcommit 57bfeecc72bd0888333128a4ebc18d201f802b08[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sat Nov 14 19:16:56 2015 -0600
+
+    Cambios en la base de datos
+
+[33mcommit 7ea86faf9776f232c89b7add894777900712829c[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sat Nov 14 15:15:12 2015 -0600
+
+    Funciones de Login, Logout, Register User, Cookies and Sessions
+    
+    El register crea una contraseña encriptada, login usa la llave para
+    desencriptar la contraseña, COOKIE es para verificar si ya hay cookes y
+    regresa los valores, GET_SES muestra si ya hay sesion activa y regresa
+    el nombre del usuario.
+
+[33mcommit c447868833e1bd42a6ebec8cd11dc82d3c1ceb90[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sat Nov 14 11:52:53 2015 -0600
+
+    Estructura principal del application y data layer
+
+[33mcommit d6e02bbaccf0bc53197a03d11a86e3ad75ff28df[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sat Nov 14 11:23:54 2015 -0600
+
+    Script de base de datos
+
+[33mcommit 5129a4c75a69e6f627edf8f619e587720f052aa3[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sat Nov 7 20:36:49 2015 -0600
+
+    Carousel y galeria de imagenes
+
+[33mcommit ff50741b6021a588525923990cab27502b7ea3ff[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sat Nov 7 20:35:37 2015 -0600
+
+    Carousel, design gallery
+    
+    Se agregé el carrusel para diseños de la semana y la galería de nuevos
+    diseños.
+
+[33mcommit ac77800a00d7b4f49e4378a338aef8bfbee7ae46[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sat Nov 7 17:03:52 2015 -0600
+
+    Algunos diseños
+    
+    Se agregaron varios diseños para usar como ejemplo
+
+[33mcommit cd19c00565056cdb370a5d4098f643c00a70a5e4[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sat Nov 7 14:09:20 2015 -0600
+
+    Formato de header navbar
+    
+    Falta ponerle un logo y los botones de sign in y register, y cambiarle
+    colores con css
+
+[33mcommit 6dcbdf816108a07f98d9dc136f7033e756a91e97[m
+Author: maumruiz <mau.mruiz@hotmail.com>
+Date:   Sat Nov 7 12:18:51 2015 -0600
+
+    Carpetas de trabajo y Bootstrap
+    
+    Se crearon las carpetas css, js, data, img y fonts.
+    Se agregaron los archivos de bootstrap
+
+[33mcommit 2f7983c684633a1f5346cd713fc313bbdcc615a9[m
+Author: Kevin <Kevoestrada@gmail.com>
+Date:   Fri Nov 6 07:34:53 2015 -0600
+
+    Initial commit
