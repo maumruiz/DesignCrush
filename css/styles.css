@@ -1,10 +1,17 @@
-.navbar {
+.navbar
+{
     margin-bottom: 0;
 }
 
-.carousel, .carousel-inner > .item > img {
+.carousel, .carousel-inner > .item > img
+{
     margin: 0 auto;
     height:280px;
+}
+
+.carousel
+{
+    margin-bottom: 30px;
 }
 
 @media screen and (min-width: 1px) and (max-width: 480px){
