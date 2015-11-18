@@ -342,3 +342,5 @@ footer .copyright {padding: 10px; color: #ccc;}
 
 
 
+.grid-item { width: 200px; }
+.grid-item--width2 { width: 400px; }

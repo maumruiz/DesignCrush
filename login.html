@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<header>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="home.html" class="navbar-brand">Diseñazo</a>
+            </div>
+            <!-- Inicia Menu -->
+            <div class="collapse navbar-collapse" id="navegacion">
+                <!-- Botones de navegación a la izquierda  -->
+                <!--
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="home.html">Inicio</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Categorias <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">boton 1</a></li>
+                            <li><a href="#">boton 2</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">boton 3</a></li>
+                            <li><a href="#">boton 4</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">boton</a></li>
+                    <li><a href="#">boton</a></li>
+                </ul>
+                 -->
+
+                <!-- Botones de barra de navegación derecha -->
+
+                <ul id="navRightButtons" class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="login.html">Login / Register</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="userProfile.html">My Profile</a>
+                            </li>
+                            <li>
+                                <a href="orderHistory.html">Order History</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="uploadDesign.html">Upload Design</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="shoppingCart">
+                        <a href="portfolio-4-col.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart </a>
+                    </li>
+                </ul>
+
+                <form action="" class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Page Content -->
+<section class="main container">
+
+    <!-- Breadcumbs -->
+    <!--  <div class="row">
+        <section class="post col-md-9">
+            <div class="articles">
+                <ol class="breadcrumb">
+                    <li><a href="#">Playeras</a></li>
+                    <li><a href="#">Cuadros</a></li>
+                    <li><a href="#">Stickers</a></li>
+                </ol>
+            </div>
+        </section>
+    </div> -->
+
+     <div class="container-fluid" style="margin-top: 15px">
+        <!-- Galeria de diseños -->
+        <div class = "container-fluid">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Log In</div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <div class="input-group login-input">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                                <br>
+                                <div class="input-group login-input">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password" class="form-control" placeholder="Password">
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox">Remember me
+                                    </label>
+                                </div>
+                                <button type="submit" class="btn btn-sm btn-primary pull-left"> Submit</button>
+                                <br/>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="panel-heading">Register </div>
+                    <div class="panel-body">
+                        <form role="form">
+                            <div class="form-group">
+                                <div class="input-group login-input">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                                    <input type="text" class="form-control" placeholder="Email">
+                                </div>
+                                <br>
+                                <div class="input-group login-input">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input type="text" class="form-control" placeholder="Username">
+                                </div>
+                                <br>
+                                <div class="input-group login-input">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password" class="form-control" placeholder="Password">
+                                </div>
+                                <br>
+                                <div class="input-group login-input">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input type="password" class="form-control" placeholder="Confirm Password">
+                                </div>
+                                <br>
+                                <button type="submit" class="btn btn-sm btn-primary pull-left"> Submit</button>
+                                <br/>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div><!-- Container -->
+
+</section> <!-- section main content -->
+
+<footer></footer>
+</body>
+
+<script src="js/salvattore.min.js"></script>
+<script type="text/javascript">
+
+</script>
+
+</html>
