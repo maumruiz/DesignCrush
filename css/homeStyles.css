@@ -14,6 +14,19 @@
     margin-bottom: 30px;
 }
 
+#designImage
+{
+    margin: auto;
+    width: 80%;
+    height: 80%;
+}
+
+.thumbnail
+{
+    max-width: 100%;
+    height: auto;
+}
+
 #columns a img
 {
     border: 2px ridge grey;
@@ -45,4 +58,14 @@
     #columns[data-columns]::before {
         content: '4 .col-md-3';
     }
+}
+
+.panel.with-nav-tabs .panel-heading{
+    padding: 5px 5px 0 5px;
+}
+.panel.with-nav-tabs .nav-tabs{
+	border-bottom: none;
+}
+.panel.with-nav-tabs .nav-justified{
+	margin-bottom: -1px;
 }
