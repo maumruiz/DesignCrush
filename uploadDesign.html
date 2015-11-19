@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Design Page</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/homeStyles.css" />
+    <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+<header>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="home.html" class="navbar-brand">Diseñazo</a>
+            </div>
+
+            <!-- Inicia Menu -->
+            <div class="collapse navbar-collapse" id="navegacion">
+                <!-- Botones de barra de navegación derecha -->
+                <ul id="navRightButtons" class="nav navbar-nav navbar-right">
+                    <!-- Login / Register Button -->
+                    <li>
+                        <a href="login.html">Login / Register</a>
+                    </li>
+                    <!-- User dropdown -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="userProfile.html">My Profile</a>
+                            </li>
+                            <li>
+                                <a href="orderHistory.html">Order History</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="uploadDesign.html">Upload Design</a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#">Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Shopping Cart -->
+                    <li id="shoppingCart">
+                        <a href="cart.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart </a>
+                    </li>
+                </ul>
+                <!-- Search bar -->
+                <form action="" class="navbar-form navbar-right" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search"></span>
+                    </button>
+                </form> <!-- Search bar -->
+            </div> <!-- navbar -->
+        </div> <!-- Container -->
+    </nav>
+</header>
+
+<!-- Page Content -->
+<div class="container">
+
+    <!-- Breadcumbs -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">Upload Design
+                <small></small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="home.html">Home</a></li>
+                <li class="active">Upload Design</li>
+            </ol>
+        </div> <!-- col-lg-12 -->
+    </div> <!-- Row -->
+
+    <!-- Design Row -->
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-heading">Upload your design!</div>
+            <div class="panel-body">
+                <img id="design"  width="140" height="140" class="img-thumbnail" src="http://placehold.it/140x140"/>
+                <label class="control-label">Select image</label>
+                <input id="input-1" type="file" class="file" onchange="$('#design')[0].src = window.URL.createObjectURL(this.files[0])">
+                </br>
+                <input id="submit" type="submit" class="btn btn-info" onchange="$('#design')[0].src = window.URL.createObjectURL(this.files[0])">
+
+            </div>
+        </div>
+
+
+
+    </div> <!-- row -->
+
+</div> <!-- Main Container -->
+
+</body>
+<script src="js/salvattore.min.js"></script>
+<script type="text/javascript">
+    $(document).on('ready',function() {
+
+        // Setting the action to get user session
+        $.ajax({
+            type: 'POST',
+            url: 'data/applicationLayer.php',
+            dataType: 'json',
+            data: {'action':'GET_SES'},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            success: function(jsonData) {
+                var navButtons = '<li class="dropdown">' +
+                        '<a href="#" class="dropdown-toggle"' + 'data-toggle="dropdown"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User <b class="caret"></b></a>' +
+                        '<ul class="dropdown-menu">'+
+                        '<li><a href="userProfile.html">My Profile</a></li>'
+                '<li><a href="orderHistory.html">Order History</a></li>' +
+                '<li class="divider"></li>' +
+                '<li><a href="uploadDesign.html">Upload Design</a></li>' +
+                '<li class="divider"></li>' +
+                '<li><a href="#">Logout</a></li></ul></li>' +
+                '<li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart </a></li>'
+
+                $("#navRightButtons").html(navButtons);
+            },
+            error: function(errorMsg){
+                var navButtons = '<li><a href="login.html">Login / Register</a></li>'
+
+                $("#navRightButtons").html(navButtons);
+            }
+        });
+
+    });
+</script>
+
+</html>
