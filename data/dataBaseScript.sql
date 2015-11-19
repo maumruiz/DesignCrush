@@ -1,4 +1,4 @@
-CREATE DATABASE Disenazo;
+﻿CREATE DATABASE Disenazo;
 USE Disenazo;
 
 CREATE TABLE User (
