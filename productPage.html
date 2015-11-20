@@ -56,20 +56,21 @@
         <!-- Breadcumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Design
-                    <small>Info</small>
+                <h1 class="page-header">Product
+                    <small>Select</small>
                 </h1>
                 <ol class="breadcrumb">
                     <li><a href="home.html">Home</a></li>
-                    <li class="active">Design Page</li>
+                    <li><a href="designPage.html">Design</a></li>
+                    <li class="active">Product</li>
                 </ol>
             </div> <!-- col-lg-12 -->
-        </div> <!-- Row -->
+        </div> <!-- breadcrumbs Row -->
 
-        <!-- Design Row -->
+        <!-- Product Row -->
         <div class="row">
             <div class="col-md-6">
-                <div id="designImage">
+                <div id="productImage">
                     <a href="#" class="thumbnail">
                         <img src="img/owl_yinyang.jpg" alt="...">
                     </a>
@@ -77,16 +78,64 @@
             </div>
 
             <div class="col-md-6">
-                <div id="designInfo" class="row">
-                    <h3>Design Name</h3>
-                    <p> Design Description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae. Sed dui lorem, adipiscing in adipiscing et, interdum nec metus. Mauris ultricies, justo eu convallis placerat, felis enim.</p>
-                </div>
-
+                <div id="productInfo">
                 <div class="row">
-                    <h3>User</h3>
-                    <p> Upload Date </p>
+                    <div class="col-lg-12">
+                        <h2 class="page-header">Select your style!</h2>
+                    </div>
                 </div>
-            </div> <!-- Design info column -->
+                <div class="row">
+                    <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="size">Size:</label>
+                        <div class="col-sm-10">
+                            <select id="sizeProduct" class="form-control">
+                                <option>XS</option>
+                                <option>S</option>
+                                <option>M</option>
+                                <option>L</option>
+                                <option>XL</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2" for="color">Color:</label>
+                        <div class="col-sm-10">
+                            <label class="radio-inline">
+                                <input type="radio" name="colorProduct" id="inlineRadio1" value="red"> <div class="productColor" style="    background-color: red"> </div>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="colorProduct" id="inlineRadio2" value="blue"> <div class="productColor" style="    background-color: midnightBlue"> </div>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="colorProduct" id="inlineRadio3" value="green"> <div class="productColor" style="    background-color: green"> </div>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="colorProduct" id="inlineRadio4" value="black"> <div class="productColor" style="    background-color: black"> </div>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="colorProduct" id="inlineRadio5" value="grey"> <div class="productColor" style="    background-color: grey"> </div>
+                            </label>
+                            <label class="radio-inline">
+                                <input type="radio" name="colorProduct" id="inlineRadio6" value="white"> <div class="productColor" style="    background-color: white"> </div>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="quantity" class="col-sm-2 control-label">Quantity:</label>
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" id="quantityProduct" placeholder="Quantity">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success btn-lg">Add to Cart</button>
+                        </div>
+                    </div>
+                    </form> <!-- Product form -->
+                </div> <!-- Form row -->
+                </div> <!-- productInfo div -->
+            </div> <!-- Product select column -->
         </div> <!-- Design row -->
 
         <!-- nav tab row (Products, Comments, Related) -->
@@ -96,8 +145,8 @@
             <div class="panel with-nav-tabs panel-info">
                 <div class="panel-heading">
                         <ul class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#tab1info" data-toggle="tab">Products</a></li>
-                            <li><a href="#tab2info" data-toggle="tab">Related</a></li>
+                            <li class="active"><a href="#tab1info" data-toggle="tab">More Products</a></li>
+                            <li><a href="#tab2info" data-toggle="tab">Related Designs</a></li>
                         </ul>
                 </div> <!-- Panel Heading -->
 
@@ -277,7 +326,6 @@
         </div> <!-- row -->
 
     </div> <!-- Main Container -->
-
 </body>
 <script src="js/salvattore.min.js"></script>
 <script type="text/javascript">

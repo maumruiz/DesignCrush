@@ -14,7 +14,12 @@
     margin-bottom: 30px;
 }
 
-#designImage
+#searchBar
+{
+    width: 300px;
+}
+
+#designImage, #productImage, #productInfo
 {
     margin: auto;
     width: 80%;
@@ -41,6 +46,18 @@
 .img-product
 {
     margin-bottom: 5%;
+}
+
+.productColor
+{
+    width: 30px;
+    height: 30px;
+    border: 2px solid black;
+}
+
+#quantityProduct,#sizeProduct
+{
+    width: 25%;
 }
 
 @media screen and (min-width: 1px) and (max-width: 480px){
