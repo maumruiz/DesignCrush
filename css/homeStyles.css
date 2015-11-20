@@ -38,11 +38,6 @@
     margin-bottom: 20px;
 }
 
-#loginButton, #userDropdown, #shoppingCart
-{
-    display: none;
-}
-
 .img-product
 {
     margin-bottom: 5%;

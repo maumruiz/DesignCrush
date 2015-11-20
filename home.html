@@ -60,42 +60,11 @@
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
-                <li data-target="#myCarousel" data-slide-to="3"></li>
             </ol>
 
             <!-- Wrapper for slides -->
-            <div class="carousel-inner" role="listbox">
-                <div class="item active">
-                    <img src="img/redwolf.jpeg" alt="firstDesign">
-                    <div class="carousel-caption">
-                        <h3>Design of the week</h3>
-                        <p>The first design of the week.</p>
-                    </div>
-                </div>
+            <div id="carouselForPopulars" class="carousel-inner" role="listbox">
 
-                <div class="item">
-                    <img src="img/jiraff.png" alt="secondDesign">
-                    <div class="carousel-caption">
-                        <h3>Design of the week</h3>
-                        <p>The second design of the week.</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="img/alien.jpg" alt="Flower">
-                    <div class="carousel-caption">
-                        <h3>Design of the week</h3>
-                        <p>The third design of the week.</p>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <img src="img/superheroes.jpg" alt="Flower">
-                    <div class="carousel-caption">
-                        <h3>Design of the week</h3>
-                        <p>The fourth design of the week.</p>
-                    </div>
-                </div>
             </div> <!-- Carousel Inner -->
 
             <!-- Left and right controls -->
@@ -229,33 +198,58 @@
 <script type="text/javascript">
     $(document).on('ready',function() {
 
-        // Setting the action to get user session
-        $.ajax({
-            type: 'POST',
-            url: 'data/applicationLayer.php',
-            dataType: 'json',
-            data: {'action':'GET_SES'},
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            success: function(jsonData) {
-                var navButtons = '<li class="dropdown">' +
-                    '<a href="#" class="dropdown-toggle"' + 'data-toggle="dropdown"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User <b class="caret"></b></a>' +
-                    '<ul class="dropdown-menu">'+
-                        '<li><a href="userProfile.html">My Profile</a></li>'
-                        '<li><a href="orderHistory.html">Order History</a></li>' +
-                        '<li class="divider"></li>' +
-                        '<li><a href="uploadDesign.html">Upload Design</a></li>' +
-                        '<li class="divider"></li>' +
-                        '<li><a href="#">Logout</a></li></ul></li>' +
-                    '<li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart </a></li>'
-
-                    $("#navRightButtons").html(navButtons);
-            },
-            error: function(errorMsg){
-                var navButtons = '<li><a href="login.html">Login / Register</a></li>'
+    // Setting the action to get user session
+    $.ajax({
+        type: 'POST',
+        url: 'data/applicationLayer.php',
+        dataType: 'json',
+        data: {'action':'GET_SES'},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        success: function(jsonData) {
+            var navButtons = '<li class="dropdown">' +
+                '<a href="#" class="dropdown-toggle"' + 'data-toggle="dropdown"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User <b class="caret"></b></a>' +
+                '<ul class="dropdown-menu">'+
+                    '<li><a href="userProfile.html">My Profile</a></li>'
+                    '<li><a href="orderHistory.html">Order History</a></li>' +
+                    '<li class="divider"></li>' +
+                    '<li><a href="uploadDesign.html">Upload Design</a></li>' +
+                    '<li class="divider"></li>' +
+                    '<li><a href="#">Logout</a></li></ul></li>' +
+                '<li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart </a></li>'
 
                 $("#navRightButtons").html(navButtons);
+        },
+        error: function(errorMsg){
+            var navButtons = '<li><a href="login.html">Login / Register</a></li>'
+
+            $("#navRightButtons").html(navButtons);
+        }
+    });
+
+    // Setting the action to get user session
+    $.ajax({
+        type: 'POST',
+        url: 'data/applicationLayer.php',
+        dataType: 'json',
+        data: {'action':'MOST_POP_WEEK'},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        success: function(jsonData) {
+            var carousel = "";
+
+            for(i = 0; i < jsonData.data.length; i++) {
+                carousel += '<div class="item">' +
+                    '<img src="img/designs/' + jsonData.data[i].designId + '" alt="' + jsonData.data[i].designId +'">' +
+                        '<div class="carousel-caption">' +
+                        '<h3>Design of the week</h3>' +
+                        '<p>'+ jsonData.data[i].designName +'</p>' +
+                    '</div></div>';
             }
-        });
+            $("#carouselForPopulars").html(carousel);
+        },
+        error: function(errorMsg){
+            $("#carouselForPopulars").html("");
+        }
+    });
 
     });
 </script>

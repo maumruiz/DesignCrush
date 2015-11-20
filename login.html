@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/homeStyles.css" />
     <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
@@ -77,14 +77,14 @@
                     <div class="form-group">
                     <div class="checkbox">
                         <label>
-                            <input type="checkbox" name="rememberMe"> Remember me
+                            <input id="rememberData" type="checkbox" name="rememberMe"> Remember me
                         </label>
                     </div>
                     </div>
                     <br>
                     <div class="form-group">
                         <div class="col-sm-offset-4 col-sm-10">
-                            <button id="loginButton" type="submit" class="btn btn-primary btn-lg">Log in</button>
+                            <input type="button" id="loginButton" value="Log in" class="btn btn-primary btn-lg"/>
                         </div>
                     </div>
                     <br/>
@@ -133,7 +133,7 @@
                     </div>
                         <div class="form-group">
                             <div class="col-sm-offset-4 col-sm-10">
-                                <button id="registerButton" type="submit" class="btn btn-success btn-lg">Register</button>
+                                <input type="button" id="registerButton" value="Register" class="btn btn-success btn-lg"/>
                             </div>
                         </div>
                 </form>
@@ -150,8 +150,88 @@
 
 <script type="text/javascript">
     $(document).on('ready',function() {
+        // Setting the action to get user cookies if they exist
+        $.ajax({
+            type: "POST",
+            url: "data/applicationLayer.php",
+            dataType: "json",
+            data: {'action':'COOKIE'},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            success: function(jsonData) {
+                $("#username-login").val(jsonData.cookieUserName);
+            },
+            error: function(errorMsg){
+                console.log(errorMsg.statusText);
+            }
+        });
 
+        // Setting the action to the login button (Redirect to home.html if the credentials are valid)
+        $('#loginButton').on('click', function(){
+            var jsonObject = {
+                'userName' : $('#username-login').val(),
+                'userPassword' : $('#password-login').val(),
+                'rememberData' : $('#rememberData').is(':checked'),
+                'action' : 'LOGIN'
+            };
 
+            $.ajax({
+                type: 'POST',
+                url: 'data/applicationLayer.php',
+                dataType: 'json',
+                data: jsonObject,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                success: function(jsonData) {
+                    window.location.replace('home.html');
+                },
+                error: function(errorMsg){
+                    alert(errorMsg.statusText);
+                }
+            });
+       });
+
+       // Setting the action to the register button (Redirect to home.html if the new credentials are valid)
+       $('#registerButton').on('click', function(){
+
+           var email, password, fName, lName, userName;
+
+           email = $('#email-register').val();
+           password = $('#password-register').val();
+           password2 = $('#password2-register').val();
+           fName = $('#firstName-register').val();
+           lName = $('#lastName-register').val();
+           userName = $('#username-register').val();
+
+           // Validate the inputs, they must contain something
+           if (email != "" && password != "" && fName != "" && lName != "" && userName != "" && password==password2)
+           {
+               var jsonObject = {
+                   'email' : email,
+                   'userPassword' : password,
+                   'userFirstName' : fName,
+                   'userLastName' : lName,
+                   'userName' : userName,
+                   'action' : 'REGISTER'
+               };
+
+               $.ajax({
+                   type: 'POST',
+                   url: 'data/applicationLayer.php',
+                   dataType: 'json',
+                   data: jsonObject,
+                   headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                   success: function(jsonData) {
+                       window.location.replace('home.html');
+                   },
+                   error: function(errorMsg){
+                       alert(errorMsg.statusText);
+                   }
+               });
+           }
+           else
+           {
+               alert('You must fill up all the inputs.');
+           }
+       });
     });
 </script>
 

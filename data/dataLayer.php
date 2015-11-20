@@ -186,7 +186,7 @@
 
         if($conn != null)
         {
-            $sql = "SELECT * FROM Design WHERE uploadDate > DATE_SUB(curdate(), INTERVAL 1 WEEK) ORDER BY views DESC LIMIT 5";
+            $sql = "SELECT * FROM Design WHERE uploadDate > DATE_SUB(curdate(), INTERVAL 1 WEEK) ORDER BY views DESC LIMIT 3";
             $result = $conn->query($sql);
 
             if($result->num_rows > 0)
