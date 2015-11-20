@@ -38,6 +38,11 @@
     display: none;
 }
 
+.img-product
+{
+    margin-bottom: 5%;
+}
+
 @media screen and (min-width: 1px) and (max-width: 480px){
     #columns[data-columns]::before {
 	    content: '1 .col-xs-12';
