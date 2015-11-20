@@ -113,7 +113,8 @@ VALUES 	('t-shirt', 'clothing', 200),
 INSERT INTO User (fName, lName, userName, email, passwrd)
 VALUES 	('Matt', 'Murdock', 'Daredevil', 'dare@devil', 'daredevil');
 
-INSERT INTO Design (designId, userName, designName, description, price)
-VALUES 	('alien_j3s94hjdolp8x', 'Daredevil', 'alienigena', 'Un diseño espacial de un alien', 20),
-		('coffee_42jh4ilos39uc', 'Daredevil', 'coffee', 'Diseño de una taza bien rara', 15),
-		('owl_yinyang_jkj48sidl98j3', 'Daredevil', 'owl_yinyang', 'El yinyang representado con unas lechuzas', 25);
+INSERT INTO Design (designId, userName, designName, description, pricePercent)
+VALUES 	('alien_j3s94hjdolp8x.jpg', 'Daredevil', 'alienigena', 'Un diseño espacial de un alien', 20),
+		('coffee_42jh4ilos39uc.png', 'Daredevil', 'coffee', 'Diseño de una taza bien rara', 15),
+		('owl_yinyang_jkj48sidl98j3.jpg', 'Daredevil', 'owl_yinyang', 'El yinyang representado con unas lechuzas', 25),
+		('564935619e489_superheroes.jpg', 'Daredevil', 'superheroes', 'Un chido diseno de grandes superheroes de DC', 25);

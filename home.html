@@ -60,6 +60,7 @@
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
                 <li data-target="#myCarousel" data-slide-to="2"></li>
+                <li data-target="#myCarousel" data-slide-to="3"></li>
             </ol>
 
             <!-- Wrapper for slides -->
@@ -195,36 +196,9 @@
 </body>
 
 <script src="js/salvattore.min.js"></script>
+<script src="js/navButtons.js"></script>
 <script type="text/javascript">
     $(document).on('ready',function() {
-
-    // Setting the action to get user session
-    $.ajax({
-        type: 'POST',
-        url: 'data/applicationLayer.php',
-        dataType: 'json',
-        data: {'action':'GET_SES'},
-        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        success: function(jsonData) {
-            var navButtons = '<li class="dropdown">' +
-                '<a href="#" class="dropdown-toggle"' + 'data-toggle="dropdown"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User <b class="caret"></b></a>' +
-                '<ul class="dropdown-menu">'+
-                    '<li><a href="userProfile.html">My Profile</a></li>'
-                    '<li><a href="orderHistory.html">Order History</a></li>' +
-                    '<li class="divider"></li>' +
-                    '<li><a href="uploadDesign.html">Upload Design</a></li>' +
-                    '<li class="divider"></li>' +
-                    '<li><a href="#">Logout</a></li></ul></li>' +
-                '<li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart </a></li>'
-
-                $("#navRightButtons").html(navButtons);
-        },
-        error: function(errorMsg){
-            var navButtons = '<li><a href="login.html">Login / Register</a></li>'
-
-            $("#navRightButtons").html(navButtons);
-        }
-    });
 
     // Setting the action to get user session
     $.ajax({
@@ -236,13 +210,22 @@
         success: function(jsonData) {
             var carousel = "";
 
-            for(i = 0; i < jsonData.data.length; i++) {
+            //First design (item active in carousel)
+            carousel += '<div class="item active">' +
+                '<div class="fillCarousel">' +
+                '<img src="img/designs/' +
+                jsonData.data[0].designId + '" alt="' + jsonData.data[0].designId +'">' +
+                '<div class="carousel-caption">' +
+                '<h3>' + jsonData.data[0].designName + '</h3><p>Design of the week</p>' +
+            '</div></div></div>';
+
+            for(i = 1; i < jsonData.data.length; i++) {
                 carousel += '<div class="item">' +
+                '<div class="fillCarousel">' +
                     '<img src="img/designs/' + jsonData.data[i].designId + '" alt="' + jsonData.data[i].designId +'">' +
                         '<div class="carousel-caption">' +
-                        '<h3>Design of the week</h3>' +
-                        '<p>'+ jsonData.data[i].designName +'</p>' +
-                    '</div></div>';
+                        '<h3>' + jsonData.data[i].designName + '</h3><p>Design of the week</p>' +
+                    '</div></div></div>';
             }
             $("#carouselForPopulars").html(carousel);
         },
