@@ -108,9 +108,9 @@
                 <div class="col-md-12">
                 <div class="list-group">
                     <span class="list-group-item active"> Your Account </span>
-                    <a href="#" class="list-group-item"> Profile </a>
-                    <a href="#" class="list-group-item"> Order History </a>
-                    <a href="#" class="list-group-item"> Upload Design </a>
+                    <a href="userProfile.html" class="list-group-item"> Profile </a>
+                    <a href="orderHistory.html" class="list-group-item"> Order History </a>
+                    <a href="uploadDesign.html" class="list-group-item"> Upload Design </a>
                 </div> <!-- list group user -->
                 </div> <!-- col-md-12 -->
             </div> <!-- Sidebar -->
@@ -121,41 +121,12 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">Newest Designs</h3>
                 </div>
-            <div class="panel-body">
-            <div class="row">
-            <div id="columns" data-columns>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/alien.jpg" alt="">
-                </a>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/cdr_brain.png" alt="">
-                </a>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/coffee.png" alt="">
-                </a>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/godzilla.jpg" alt="">
-                </a>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/jiraff.png" alt="">
-                </a>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/pizza.png" alt="">
-                </a>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/redwolf.jpeg" alt="">
-                </a>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/superheroes.jpg" alt="">
-                </a>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/rock.jpg" alt="">
-                </a>
-                <a class="" href="designPage.html">
-                    <img class="img-responsive" src="img/weird_face.png" alt="">
-                </a>
-            </div> <!-- Columns of images -->
-        </div> <!-- row gallery -->
+                <div class="panel-body">
+                <div class="row">
+                    <div id="columns" data-columns>
+
+                    </div> <!-- Columns of images -->
+                </div> <!-- row gallery -->
 
             <!-- Pagination -->
             <div class="row text-center">
@@ -200,7 +171,9 @@
 <script type="text/javascript">
     $(document).on('ready',function() {
 
-    // Setting the action to get user session
+
+
+    // Setting the action to get popular designs
     $.ajax({
         type: 'POST',
         url: 'data/applicationLayer.php',
@@ -231,6 +204,33 @@
         },
         error: function(errorMsg){
             $("#carouselForPopulars").html("");
+        }
+    });
+
+    // Setting the action to get newest design
+    $.ajax({
+        type: 'POST',
+        url: 'data/applicationLayer.php',
+        dataType: 'json',
+        data: {'action':'NEW_DESIGNS'},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        success: function(jsonData) {
+
+            var grid = document.querySelector('#columns');
+            var item = document.createElement('article');
+
+            var gallery = "";
+
+            for(i = 0; i < jsonData.data.length; i++) {
+                salvattore.appendElements(grid, [item]);
+                item.outerHTML = '<a class="" href="designPage.html">' +
+                        '<img class="img-responsive" src="img/designs/' + jsonData.data[i].designId + '" alt="' + jsonData.data[i].designId + '"></a>';
+            }
+
+        },
+        error: function(errorMsg){
+            $("#carouselForPopulars").html("");
+            alert(errorMsg.statusText);
         }
     });
 
