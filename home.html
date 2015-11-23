@@ -171,8 +171,6 @@
 <script type="text/javascript">
     $(document).on('ready',function() {
 
-
-
     // Setting the action to get popular designs
     $.ajax({
         type: 'POST',
@@ -234,7 +232,26 @@
         }
     });
 
+    // Setting the action for the design data persistance
+    $("#columns").on('click','a',function(){
+        var designId = $(this).children("img").attr("alt");
+
+        $.ajax({
+            type: 'POST',
+            url: 'data/applicationLayer.php',
+            dataType: 'json',
+            data: {'action':'SET_DESIGN', 'designId':designId},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            success: function(jsonData) {
+                console.log(jsonData);
+            },
+            error: function(errorMsg){
+                console.log(errorMsg.statusText);
+            }
+        });
     });
+
+});
 </script>
 
 </html>

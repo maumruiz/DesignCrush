@@ -20,17 +20,27 @@
 						      break;
 		case 'REGISTER':      registerUser();
 						      break;
+        case 'SET_DESIGN':    setDesignSession();
+                              break;
+        case 'SET_PRODUCT':   setProductSession();
+                              break;
         case 'NEW_DESIGNS':   getDesigns('NEW_DESIGNS');
                               break;
         case 'MOST_POP_WEEK': getDesigns('MOST_POP_WEEK');
                               break;
         case 'DESIGN':        getCompleteDesign();
                               break;
+        case 'PRODUCT':       getCompleteProduct();
+                              break;
+        case 'GET_CART':       getUserCart();
+                              break;
         case 'ADD_CART':      addItemsToCart();
                               break;
         case 'DELETE_CART':   deleteItemFromCart();
                               break;
         case 'BUY_CART':      buyCart();
+                              break;
+        case 'PAST_ORDERS':   getOrderHistory();
                               break;
         case 'UP_DESIGN':     uploadDesign();
                               break;
@@ -208,6 +218,37 @@
     	}
     }
 
+    # Action to set a design id in the session
+	function setDesignSession()
+    {
+        $designId = $_POST['designId'];
+		// Starting the session
+	    session_start();
+		$_SESSION['designId'] = $designId;
+    }
+    # Action to set a product name in the session
+	function setProductSession()
+    {
+        $productName = $_POST['productName'];
+		// Starting the session
+	    session_start();
+		$_SESSION['productName'] = $productName;
+    }
+
+    # Action to get the current session data
+    function getProductSession()
+    {
+    	session_start();
+    	if (isset($_SESSION['productName']) && $_SESSION['designId'])
+    	{
+    		echo json_encode(array("productName" => $_SESSION['productName'], "designId" => $_SESSION['designId']));
+    	}
+    	else
+    	{
+    		echo json_encode(errors(417));
+    	}
+    }
+
     # Action to end the current session data
     function endSession()
 	{
@@ -217,7 +258,6 @@
 			unset($_SESSION['userFirstName']);
 			unset($_SESSION['userLastName']);
 			unset($_SESSION['userName']);
-			session_destroy();
 
 			echo json_encode(array('success' => 'Session deleted'));
 		}
@@ -226,6 +266,8 @@
 			die(json_encode(errors(417)));
 		}
 	}
+
+
 
     # Action to get all designs from the newest to the oldest
     # It doesn't need anything from the front-end, just the action
@@ -259,31 +301,139 @@
     }
 
     # Action to get the whole design info
-    # Neeeds the designId from the front-end
+    # Neeeds the designId from the session
     function getCompleteDesign()
     {
-        $designId = $_POST['designId'];
-        $result = getCompleteDesignDB($designId);
+        session_start();
+    	if (isset($_SESSION['designId']))
+    	{
+    		$designId = $_SESSION['designId'];
 
-        if($result['message'] == 'OK')
-        {
-            # All the info of the design
-            echo json_encode($result);
-        }
-        else
-        {
-            if($result['message'] == 'NONE')
+            $result = getCompleteDesignDB($designId);
+
+            if($result['message'] == 'OK')
             {
-                # No designs with that designId
+                # All the info of the design
                 echo json_encode($result);
             }
             else
             {
-                # Error
-                die(json_encode($result));
+                if($result['message'] == 'NONE')
+                {
+                    # No designs with that designId
+                    echo json_encode($result);
+                }
+                else
+                {
+                    # Error
+                    die(json_encode($result));
+                }
             }
-        }
+    	}
+    	else
+    	{
+    		echo json_encode(errors(417));
+    	}
     }
+
+    # Action to get the whole product info
+    # Neeeds the productId from the session
+    function getCompleteProduct()
+    {
+        session_start();
+    	if (isset($_SESSION['productName']))
+    	{
+    		$productName = $_SESSION['productName'];
+
+            $result = getCompleteProductDB($productName);
+
+            if($result['message'] == 'OK')
+            {
+                # All the info of the design
+                $result['unitPrice'] = getUnitPrice();
+                $result['designId'] = $_SESSION['designId'];
+                echo json_encode($result);
+            }
+            else
+            {
+                if($result['message'] == 'NONE')
+                {
+                    # No designs with that designId
+                    echo json_encode($result);
+                }
+                else
+                {
+                    # Error
+                    die(json_encode($result));
+                }
+            }
+    	}
+    	else
+    	{
+    		echo json_encode(errors(417));
+    	}
+    }
+
+    #Action to get user cart
+	function getUserCart()
+	{
+		session_start();
+		if (isset($_SESSION['userName']))
+		{
+			$result = getCartDB($_SESSION['userName']);
+
+			if ($result['message'] == 'OK')
+			{
+				echo json_encode($result);
+			}
+			else
+			{
+				if ($result['message'] == 'NONE')
+				{
+					echo json_encode($result);
+				}
+				else
+				{
+					die(json_encode($result));
+				}
+			}
+		}
+		else
+		{
+			die(json_encode(errors(417)));
+		}
+	}
+
+    #Action to get user order history
+	function getOrderHistory()
+	{
+		session_start();
+		if (isset($_SESSION['userName']))
+		{
+			$result = getOrderHistoryDB($_SESSION['userName']);
+
+			if ($result['message'] == 'OK')
+			{
+				echo json_encode($result);
+			}
+			else
+			{
+				if ($result['message'] == 'NONE')
+				{
+					echo json_encode($result);
+				}
+				else
+				{
+					die(json_encode($result));
+				}
+			}
+		}
+		else
+		{
+			die(json_encode(errors(417)));
+		}
+	}
+
 
     # Action to add an order to the Cart
     # Needs all the columns of the cart except username from the front-end that includes:
@@ -291,18 +441,20 @@
     # quantity and the total price of the order
 	function addItemsToCart()
 	{
-        $design = $_POST['design'];
-        $product =  $_POST['product'];
-        $color =  $_POST['color'];
-        $size =  $_POST['size'];
-        $unitPrice =  $_POST['unitPrice'];
-        $quantity =  $_POST['quantity'];
-        $totalPrice = $_POST['totalPrice'];
-
-		session_start();
-		if(isset($_SESSION['userName']))
+        session_start();
+		if(isset($_SESSION['userName']) && isset($_SESSION['designId']) && isset($_SESSION['productName']))
 		{
-			$result = addItemsToCartDB($_SESSION['userName'], $design, $product, $color, $size, $unitPrice, $quantity, $totalPrice);
+            $userName = $_SESSION['userName'];
+            $design = $_SESSION['designId'];
+            $product =  $_SESSION['productName'];
+            $color =  $_POST['color'];
+            $size =  $_POST['size'];
+            $quantity =  $_POST['quantity'];
+            $unitPrice = getUnitPrice();
+
+            $totalPrice =  $unitPrice * intval($quantity);
+
+			$result = addItemsToCartDB($userName, $design, $product, $color, $size, $unitPrice, $quantity, $totalPrice);
 			if($result['status'] == 'COMPLETE')
 			{
 				echo json_encode($result);
@@ -318,6 +470,29 @@
 			die(json_encode(errors(417)));
 		}
 	}
+
+    function getUnitPrice()
+    {
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+
+		if(isset($_SESSION['designId']) && isset($_SESSION['productName']))
+		{
+            $design = $_SESSION['designId'];
+            $product =  $_SESSION['productName'];
+
+            $productPrice = getProductPriceDB($product);
+            $designPrice = getDesignPriceDB($design);
+            $unitPrice = $productPrice + (($designPrice * $productPrice) / 100.0);
+
+			return $unitPrice;
+		}
+		else
+		{
+			die(json_encode(errors(417)));
+		}
+    }
 
     # Action to delete a single order from the cart
     # Needs the orderId of the order from the front-end
@@ -411,13 +586,15 @@
 		session_start();
 		if(isset($_SESSION['userName']))
 		{
-            $designId = $_POST['designId'];
+            $designId = $_SESSION['designId'];
             $comment = $_POST['comment'];
 
 			$result = commentDesignDB($_SESSION['userName'], $designId, $comment);
 
 			if($result['status'] == 'COMPLETE')
 			{
+                $result['firstName'] = $_SESSION['userFirstName'];
+                $result['lastName'] = $_SESSION['userLastName'];
 				echo json_encode($result);
 			}
 			else
@@ -437,7 +614,8 @@
     # Return a json with the username, comment and Date
     function getCommentsOfDesign()
     {
-        $designId = $_POST['designId'];
+        session_start();
+        $designId = $_SESSION['designId'];
         $result = getCommentsOfDesignDB($designId);
 
         if($result['message'] == 'OK')

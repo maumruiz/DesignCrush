@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Design Page</title>
+    <title>Cart</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
@@ -71,9 +71,7 @@
         <div class="row">
             <div class="col-md-6">
                 <div id="productImage">
-                    <a href="#" class="thumbnail">
-                        <img src="img/owl_yinyang.jpg" alt="...">
-                    </a>
+
                 </div>
             </div>
 
@@ -81,14 +79,20 @@
                 <div id="productInfo">
                 <div class="row">
                     <div class="col-lg-12">
-                        <h2 class="page-header">Select your style!</h2>
+                        <h2 id="buyHeader" class="page-header"></h2>
                     </div>
                 </div>
                 <div class="row">
                     <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="control-label col-sm-2" for="size">Size:</label>
-                        <div class="col-sm-10">
+                      <label class="col-sm-3 control-label">Type: </label>
+                      <div class="col-sm-9">
+                        <p id="productTypeText" class="form-control-static"><strong></strong></p>
+                      </div>
+                    </div>
+                    <div id="sizeProduct-group" class="form-group">
+                        <label class="control-label col-sm-3" for="size">Size:</label>
+                        <div class="col-sm-9">
                             <select id="sizeProduct" class="form-control">
                                 <option>XS</option>
                                 <option>S</option>
@@ -98,38 +102,45 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="control-label col-sm-2" for="color">Color:</label>
-                        <div class="col-sm-10">
+                    <div id="colorProduct-group" class="form-group">
+                        <label class="control-label col-sm-3" for="color">Color:</label>
+                        <div class="col-sm-9">
                             <label class="radio-inline">
-                                <input type="radio" name="colorProduct" id="inlineRadio1" value="red"> <div class="productColor" style="    background-color: red"> </div>
+                                <input type="radio" name="colorProduct" value="red"> <div class="productColor" style="    background-color: red"> </div>
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="colorProduct" id="inlineRadio2" value="blue"> <div class="productColor" style="    background-color: midnightBlue"> </div>
+                                <input type="radio" name="colorProduct" value="blue"> <div class="productColor" style="    background-color: midnightBlue"> </div>
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="colorProduct" id="inlineRadio3" value="green"> <div class="productColor" style="    background-color: green"> </div>
+                                <input type="radio" name="colorProduct" value="green"> <div class="productColor" style="    background-color: green"> </div>
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="colorProduct" id="inlineRadio4" value="black"> <div class="productColor" style="    background-color: black"> </div>
+                                <input type="radio" name="colorProduct" value="black"> <div class="productColor" style="    background-color: black"> </div>
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="colorProduct" id="inlineRadio5" value="grey"> <div class="productColor" style="    background-color: grey"> </div>
+                                <input type="radio" name="colorProduct" value="grey"> <div class="productColor" style="    background-color: grey"> </div>
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="colorProduct" id="inlineRadio6" value="white"> <div class="productColor" style="    background-color: white"> </div>
+                                <input type="radio" name="colorProduct" value="white"> <div class="productColor" style="    background-color: white"> </div>
                             </label>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label for="quantity" class="col-sm-2 control-label">Quantity:</label>
-                        <div class="col-sm-10">
-                            <input type="number" class="form-control" id="quantityProduct" placeholder="Quantity">
+                    <div id="quantityProduct-group" class="form-group">
+                        <label for="quantity" class="col-sm-3 control-label">Quantity:</label>
+                        <div class="col-sm-9">
+                            <input type="number" value=1 class="form-control" id="quantityProduct" placeholder="Quantity">
                         </div>
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-success btn-lg">Add to Cart</button>
+                      <label class="col-sm-3 control-label">Unit Price:</label>
+                      <div class="col-sm-9">
+                        <p id="unitPriceText" class="form-control-static"><strong></strong></p>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <div class="col-sm-10">
+                            <button id="addToCartButton" type="button" class="btn btn-success btn-lg pull-right">Add to Cart</button>
                         </div>
                     </div>
                     </form> <!-- Product form -->
@@ -145,8 +156,8 @@
             <div class="panel with-nav-tabs panel-info">
                 <div class="panel-heading">
                         <ul class="nav nav-tabs nav-justified">
-                            <li class="active"><a href="#tab1info" data-toggle="tab">More Products</a></li>
-                            <li><a href="#tab2info" data-toggle="tab">Related Designs</a></li>
+                            <li class="active"><a href="#tab1info" data-toggle="tab">Products</a></li>
+                            <li><a href="#tab2info" data-toggle="tab">Related</a></li>
                         </ul>
                 </div> <!-- Panel Heading -->
 
@@ -161,22 +172,22 @@
 
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/tshirt.png" alt="t-shirt">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/vneck.png" alt="v-neck">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/longsleeve.png" alt="long sleeve">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/hoodie.png" alt="hoodie">
                                     </a>
                                 </div>
                             </div> <!-- /.row -->
@@ -189,24 +200,30 @@
 
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/poster.jpg" alt="poster">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/artprint.jpg" alt="art print">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/framedart.png" alt="framed print">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/canvas.jpg" alt="canvas print">
                                     </a>
                                 </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <a href="productPage.html">
+                                        <img class="img-responsive img-hover img-product" src="img/products/metal.jpg" alt="metal print">
+                                    </a>
+                                </div>
+
                             </div> <!-- /.row -->
 
                             <!-- Cases Row -->
@@ -217,22 +234,22 @@
 
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/iphonecase.jpg" alt="iphone case">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/samsungcase.jpg" alt="samsung case">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/ipadcase.jpg" alt="ipad case">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/laptopskin.jpg" alt="laptop skin">
                                     </a>
                                 </div>
                             </div> <!-- /.row -->
@@ -245,17 +262,17 @@
 
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/sticker.png" alt="sticker">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/notebook.jpg" alt="notebook">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/hardcoverjournal.png" alt="hardcover journal">
                                     </a>
                                 </div>
                             </div> <!-- /.row -->
@@ -268,23 +285,25 @@
 
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/cup.png" alt="cup">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/thermo.png" alt="thermo">
                                     </a>
                                 </div>
                                 <div class="col-sm-6 col-xs-6">
                                     <a href="productPage.html">
-                                        <img class="img-responsive img-hover img-product" src="http://placehold.it/500x300" alt="">
+                                        <img class="img-responsive img-hover img-product" src="img/products/popcornbowl.png" alt="popcorn bowl">
                                     </a>
                                 </div>
                             </div> <!-- /.row -->
                         </div> <!-- tab pane -->
 
-                        <div class="tab-pane fade" id="tab2info">Related</div>
+                        <div class="tab-pane fade" id="tab2info">
+                            Related
+                        </div>
 
                     </div> <!-- div tab-content -->
                 </div> <!-- div panel-body -->
@@ -294,35 +313,20 @@
             <!-- Comments -->
             <div class="col-md-6">
                 <div class="well">
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" alt="64x64" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><strong>John Thor</strong></h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
-                    <div class="media">
-                        <a class="pull-left" href="#">
-                            <img class="media-object" alt="64x64" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZWVlIi8+PHRleHQgdGV4dC1hbmNob3I9Im1pZGRsZSIgeD0iMzIiIHk9IjMyIiBzdHlsZT0iZmlsbDojYWFhO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1zaXplOjEycHg7Zm9udC1mYW1pbHk6QXJpYWwsSGVsdmV0aWNhLHNhbnMtc2VyaWY7ZG9taW5hbnQtYmFzZWxpbmU6Y2VudHJhbCI+NjR4NjQ8L3RleHQ+PC9zdmc+">
-                        </a>
-                        <div class="media-body">
-                            <h5 class="media-heading"><strong>Michael</strong></h5>
-                            Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                        </div>
-                    </div>
+                    <h3 style="text-align: center"><strong>Design commments</strong></h3>
                     <hr>
-                    <h4>Add your commment</h4>
-                    <p></p>
                     <form role="form">
                         <div class="form-group">
-                            <textarea class="form-control" rows="5" placeholder="Your Comment"></textarea>
+                            <textarea id="commentTextarea" class="form-control" rows="5" maxlength="500" placeholder="Leave a comment"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-default">Submit Review</button>
+                        <button type="button" class="btn btn-danger pull-right" id="addCommentButton">Add Comment</button>
                     </form>
-                </div>
-            </div>
+                    <br><hr>
+                    <div id="commentsSection">
+
+                    </div><!-- Comments section -->
+                </div> <!-- well -->
+            </div> <!-- col-md-6 -->
         </div> <!-- row -->
 
     </div> <!-- Main Container -->
@@ -331,6 +335,148 @@
 <script src="js/navButtons.js"></script>
 <script type="text/javascript">
     $(document).on('ready',function() {
+
+        // Setting the action to get product info
+        $.ajax({
+            type: 'POST',
+            url: 'data/applicationLayer.php',
+            dataType: 'json',
+            data: {'action':'PRODUCT'},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            success: function(jsonData) {
+                var designImage = '<a href="#" class="thumbnail">                    <img src="img/designs/'+ jsonData.designId + '" alt="..."></a>';
+
+                var productImage = '<a href="#" class="thumbnail">                    <img src="img/products/'+ jsonData.data[0].smallImage  + '" alt="..."></a>';
+
+                $("#buyHeader").html(jsonData.data[0].productName);
+                $("#productImage").html(designImage + productImage);
+                $("#unitPriceText").children("strong").html(jsonData.unitPrice);
+                $("#productTypeText").children("strong").html(jsonData.data[0].type);
+
+                if(jsonData.data[0].type == "wall-art")
+                {
+                    $("#colorProduct-group").hide();
+                }
+
+                if(jsonData.data[0].type == "cases")
+                {
+                    $("#sizeProduct-group").hide();
+                }
+
+            },
+            error: function(errorMsg){
+                console.log(errorMsg);
+            }
+        });
+
+        // Setting the action to get the comments made to the design
+        $.ajax({
+            type: 'POST',
+            url: 'data/applicationLayer.php',
+            dataType: 'json',
+            data: {'action':'GET_COMMENT'},
+            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+            success: function(jsonData) {
+                var commentCode = "";
+                var name = "";
+
+                for(i = 0; i < jsonData.data.length; i++) {
+                    name = jsonData.data[i].fName +' '+ jsonData.data[i].lName;
+                    commentCode += '<div class="media">' +
+                        '<a class="pull-left" href="#">' +
+                            '<img class="media-object" alt="64x64" src="img/admin/user.png"></a>' +
+                        '<div class="media-body">' +
+                            '<h5 class="media-heading"><strong>' + name + '</strong></h5>' + jsonData.data[i].comment + '</div></div>';
+                }
+
+                $("#commentsSection").html(commentCode);
+            },
+            error: function(errorMsg){
+                console.log(errorMsg.statusText);
+            }
+        });
+
+        $('#addToCartButton').on('click', function(){
+            var jsonObject = {'action':'ADD_CART',
+                    "quantity": $("#quantityProduct").val()};
+
+            if($("#productTypeText").text() == "wall-art"){
+                jsonObject['size'] = $("#sizeProduct option:selected").text();
+                jsonObject['color'] = "-";
+            } else if($("#productTypeText").text() == "cases"){
+                jsonObject['size'] = "-";
+                jsonObject['color'] = $("input[name=colorProduct]:checked").val();
+            } else {
+                jsonObject['size'] = $("#sizeProduct option:selected").text();
+                jsonObject['color'] = $("input[name=colorProduct]:checked").val();
+            }
+
+            console.log(jsonObject);
+
+            $.ajax({
+                type: 'POST',
+                url: 'data/applicationLayer.php',
+                dataType: 'json',
+                data: jsonObject,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                success: function(jsonData) {
+                    alert("Your product has been added to the cart");
+                    window.location.reload();
+                },
+                error: function(errorMsg){
+                    console.log(errorMsg);
+                }
+            });
+        });
+
+        // Setting the action to add a comment to the design
+        $('#addCommentButton').on('click', function(){
+            var comment = $("#commentTextarea").val();
+            var commentCode = "";
+
+            $.ajax({
+                type: 'POST',
+                url: 'data/applicationLayer.php',
+                dataType: 'json',
+                data: {'action':'COMMENT', 'comment':comment},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                success: function(jsonData) {
+                    var name = jsonData.firstName +' '+ jsonData.lastName;
+
+                    commentCode = '<div class="media">' +
+                        '<a class="pull-left" href="#">' +
+                            '<img class="media-object" alt="64x64" src="img/admin/user.png"></a>' +
+                        '<div class="media-body">' +
+                            '<h5 class="media-heading"><strong>' + name + '</strong></h5>' + comment + '</div></div>';
+
+                    $("#commentsSection").prepend(commentCode);
+                    $("#commentTextarea").val("");
+                },
+                error: function(errorMsg){
+                    alert("You need to be logged to comment!");
+                }
+            });
+        });
+
+        // Setting the action for choosing a product
+        $("#tab1info").on('click','a',function(){
+            var productName = $(this).children("img").attr("alt");
+
+            $.ajax({
+                type: 'POST',
+                url: 'data/applicationLayer.php',
+                dataType: 'json',
+                data: {'action':'SET_PRODUCT', 'productName':productName},
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                success: function(jsonData) {
+                    console.log(jsonData);
+                },
+                error: function(errorMsg){
+                    console.log(errorMsg.statusText);
+                }
+            });
+        });
+
 
 
     });

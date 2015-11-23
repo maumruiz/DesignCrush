@@ -30,7 +30,10 @@ CREATE TABLE Design(
 CREATE TABLE Product(
 	productName VARCHAR(30) NOT NULL PRIMARY KEY,
 	type VARCHAR(30),
-    	price DECIMAL NOT NULL
+    price DECIMAL NOT NULL
+	smallImage VARCHAR(30),
+	mediumImage VARCHAR(30),
+	largeImage VARCHAR(30),
 );
 
 CREATE TABLE Comment(
@@ -69,7 +72,7 @@ CREATE TABLE Cart(
     size VARCHAR(20) NOT NULL,
     unitPrice INT NOT NULL,
 	quantity INT NOT NULL,
-    totalPrice INT NOT NULL,
+    totalPrice DECIMAL NOT NULL,
 	status CHAR(1) NOT NULL,
 	FOREIGN KEY (userName)
 		REFERENCES User (userName)
@@ -88,26 +91,26 @@ CREATE TABLE Cart(
 
 --Static products
 --Divider is to balance the price of design per product
-INSERT INTO Product (productName, type, price)
-VALUES 	('t-shirt', 'clothing', 200),
-		('v-neck', 'clothing', 200),
-		('long sleeve', 'clothing', 230),
-		('hoodie', 'clothing', 300),
-		('poster', 'wall-art', 100),
-		('canvas print', 'wall-art', 500),
-		('art print', 'wall-art', 120),
-		('framed print', 'wall-art', 1000),
-		('metal print', 'wall-art', 450),
-		('iphone case', 'cases', 200),
-		('samsung case', 'cases', 200),
-		('ipad case', 'cases', 400),
-		('laptop skin', 'cases', 200),
-		('sticker', 'stationery', 15),
-		('notebook', 'stationery', 70),
-		('hardcover journal', 'stationery', 150),
-		('cup', 'home', 100),
-		('thermo', 'home', 200),
-		('popcorn bowl', 'home', 150);
+INSERT INTO Product (productName, type, price, smallImage)
+VALUES 	('t-shirt', 'clothing', 200, 'tshirt.png'),
+		('v-neck', 'clothing', 200, 'vneck.png'),
+		('long sleeve', 'clothing', 230, 'logsleeve.png'),
+		('hoodie', 'clothing', 300, 'hoodie.png'),
+		('poster', 'wall-art', 100, 'poster.jpg'),
+		('canvas print', 'wall-art', 500, 'canvas.jpg'),
+		('art print', 'wall-art', 120, 'artprint.jpg'),
+		('framed print', 'wall-art', 1000, 'framedart.png'),
+		('metal print', 'wall-art', 450, 'metal.jpg'),
+		('iphone case', 'cases', 200, 'iphonecase.jpg'),
+		('samsung case', 'cases', 200, 'samsungcase.jpg'),
+		('ipad case', 'cases', 400, 'ipadcase.jpg'),
+		('laptop skin', 'cases', 200, 'laptopskin.jpg'),
+		('sticker', 'stationery', 15, 'sticker.png'),
+		('notebook', 'stationery', 70, 'notebook.jpg'),
+		('hardcover journal', 'stationery', 150, 'harcoverjournal.png'),
+		('cup', 'home', 100, 'cup.png'),
+		('thermo', 'home', 200, 'thermo.png'),
+		('popcorn bowl', 'home', 150, 'popcornbowl.png');
 
 --Estos son solo para probar la base de datos
 INSERT INTO User (fName, lName, userName, email, passwrd)

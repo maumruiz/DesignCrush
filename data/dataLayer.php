@@ -245,6 +245,168 @@
         }
     }
 
+    # Query to get all the info about a product
+    # Needs the designId from the Application layer
+    function getCompleteProductDB($productName)
+    {
+        $conn = connect();
+
+        if($conn != null)
+        {
+            $sql = "SELECT * FROM Product WHERE productName = '$productName'";
+            $result = $conn->query($sql);
+
+            if($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $conn->close();
+                    $data[]=array_map('utf8_encode', $row);
+                    return $response = array('message' => 'OK', 'data' => $data);
+                }
+            }
+            else
+            {
+                return array('message' => 'NONE');
+            }
+        }
+        else
+        {
+            $conn->close();
+            return errors(500);
+        }
+    }
+
+    #Query to get the price of a product
+    #Need the product name
+    function getProductPriceDB($productName)
+    {
+        $conn = connect();
+
+        if($conn != null)
+        {
+            $sql = "SELECT price FROM Product WHERE productName = '$productName'";
+            $result = $conn->query($sql);
+
+            if($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    return $row['price'];
+                }
+            }
+            else
+            {
+                return array('message' => 'NONE');
+            }
+        }
+        else
+        {
+            $conn->close();
+            return errors(500);
+        }
+    }
+
+    #Query to get the price of a design
+    #Need the design id
+    function getDesignPriceDB($designId)
+    {
+        $conn = connect();
+
+        if($conn != null)
+        {
+            $sql = "SELECT pricePercent FROM Design WHERE designId = '$designId'";
+            $result = $conn->query($sql);
+
+            if($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    return $row['pricePercent'];
+                }
+            }
+            else
+            {
+                return array('message' => 'NONE');
+            }
+        }
+        else
+        {
+            $conn->close();
+            return errors(500);
+        }
+    }
+
+    #Query to get the items in the user cart
+	function getCartDB($username)
+	{
+		$conn = connect();
+
+        if ($conn != null)
+        {
+        	$sql = "SELECT Cart.*, Design.designName FROM Cart INNER JOIN Design ON Cart.design=Design.designId WHERE Cart.userName='$username' AND status='P' ORDER BY Cart.orderId ASC";
+
+        	$result = $conn->query($sql);
+
+        	if ($result->num_rows > 0)
+			{
+				$data = array();
+				while($row = $result->fetch_assoc())
+		    	{
+		    		array_push($data, $row);
+		    	}
+
+		    	$response = array('message' => 'OK', 'data' => $data);
+		    	$conn->close();
+		    	return $response;
+			}
+			else
+			{
+				return array('message' => 'NONE');
+			}
+        }
+        else
+        {
+        	$conn->close();
+        	return errors(500);
+        }
+	}
+
+    #Query to get the user order history
+	function getOrderHistoryDB($username)
+	{
+		$conn = connect();
+
+        if ($conn != null)
+        {
+        	$sql = "SELECT Cart.*, Design.designName FROM Cart INNER JOIN Design ON Cart.design=Design.designId WHERE Cart.userName='$username' AND status='B' ORDER BY Cart.orderId DESC";
+
+        	$result = $conn->query($sql);
+
+        	if ($result->num_rows > 0)
+			{
+				$data = array();
+				while($row = $result->fetch_assoc())
+		    	{
+		    		array_push($data, $row);
+		    	}
+
+		    	$response = array('message' => 'OK', 'data' => $data);
+		    	$conn->close();
+		    	return $response;
+			}
+			else
+			{
+				return array('message' => 'NONE');
+			}
+        }
+        else
+        {
+        	$conn->close();
+        	return errors(500);
+        }
+	}
+
     #Query to add Items to the Cart
     # Needs all the columns of the cart from the front-end that includes:
     # username, designId, productId, color, size, unitPrice (productPrice+designPrice),
@@ -395,7 +557,7 @@
 
         if($conn != null)
         {
-            $sql = "SELECT * FROM Comment ORDER BY commentDate DESC";
+            $sql = "SELECT Comment.*, User.fName,User.lName FROM Comment INNER JOIN User WHERE Comment.userName = User.userName AND design = '$designId' ORDER BY commentDate DESC";
             $result = $conn->query($sql);
 
             if($result->num_rows > 0)
