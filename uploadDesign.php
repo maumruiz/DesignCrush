@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Design Page</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8"/>
+    <title>Bootstrap File Upload</title>
+        
+	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="css/homeStyles.css" />
-    <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+       
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/fileinput.min.js" type="text/javascript"></script>
-    <script src="js/bootstrap.min.js"></script>
-</head>
-<body>
-<header>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" type="text/javascript"></script>
+    
+	</head>
+    
+	<body>
+		<header>
     <!-- Navigation bar -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
         <div class="container">
@@ -73,81 +75,33 @@
         </div> <!-- Container -->
     </nav>
 </header>
-
-<!-- Page Content -->
-<div class="container">
-
-    <!-- Breadcumbs -->
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Upload Design
-                <small></small>
-            </h1>
-            <ol class="breadcrumb">
-                <li><a href="home.html">Home</a></li>
-                <li class="active">Upload Design</li>
-            </ol>
-        </div> <!-- col-lg-12 -->
-    </div> <!-- Row -->
-
-    <!-- Design Row -->
-    <div class="row">
-        <div class="panel panel-default">
-            <div class="panel-heading">Upload your design!</div>
-            <div class="panel-body">
-                <label class="control-label">Select File</label>
-                  <input id="archivos" name="imagenes[]" type="file" multiple=true class="file-loading">
-            </div>
-        </div>
-
-    </div> <!-- row -->
-
-</div> <!-- Main Container -->
-
-</body
-
-<?php   
-    $directory = "imagenes_/";      
-    $images = glob($directory . "*.*");
-?>
-
-<script>
-    $("#archivos").fileinput({
-    uploadUrl: "upload.php", 
+	<input id="archivos" name="imagenes[]" type="file" multiple=true class="file-loading">
+	</body>
+	<?php 	
+	$directory = "imagenes_/";      
+	$images = glob($directory . "*.*");
+	?>
+	
+	<script>
+	$("#archivos").fileinput({
+	uploadUrl: "upload.php", 
     uploadAsync: false,
     minFileCount: 1,
     maxFileCount: 20,
-    showUpload: false, 
-    showRemove: false,
-    initialPreview: [
-    <?php foreach($images as $image){?>
-        "<img src='<?php echo $image; ?>' height='120px' class='file-preview-image'>",
-    <?php } ?>],
+	showUpload: false, 
+	showRemove: false,
+	initialPreview: [
+	<?php foreach($images as $image){?>
+		"<img src='<?php echo $image; ?>' height='120px' class='file-preview-image'>",
+	<?php } ?>],
     initialPreviewConfig: [<?php foreach($images as $image){ $infoImagenes=explode("/",$image);?>
-    {caption: "<?php echo $infoImagenes[1];?>",  height: "120px", url: "borrar.php", key:"<?php echo $infoImagenes[1];?>"},
-    <?php } ?>]
-    }).on("filebatchselected", function(event, files) {
-    
-    $("#archivos").fileinput("upload");
-    
-    });
-    
-</script>
-
-<script src="js/fileinput.min.js"></script>
-<script type="text/javascript">
-$(document).on("ready", function() {
-    $("#images").fileinput({
-        uploadAsync: false,
-        uploadUrl: "data/upload.php", // your upload server url
-        uploadExtraData: function() {
-            return {
-                userid: $("#userid").val(),
-                username: $("#username").val()
-            };
-        }
-    });
-});
-</script>
-
+	{caption: "<?php echo $infoImagenes[1];?>",  height: "120px", url: "borrar.php", key:"<?php echo $infoImagenes[1];?>"},
+	<?php } ?>]
+	}).on("filebatchselected", function(event, files) {
+	
+	$("#archivos").fileinput("upload");
+	
+	});
+	
+	</script>
 </html>
