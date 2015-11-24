@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Design Page</title>
+    <title>Edit Profile</title>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-social.css">
     <link rel="stylesheet" type="text/css" href="css/homeStyles.css" />
-
-    <link rel="stylesheet" type="text/css" href="css/profile.css">
     <script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
     <script src="js/bootstrap.min.js"></script>
 </head>
 <body>
-<header>
+    <header>
     <!-- Navigation bar -->
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
         <div class="container">
@@ -32,38 +31,16 @@
                 <!-- Botones de barra de navegación derecha -->
                 <ul id="navRightButtons" class="nav navbar-nav navbar-right">
                     <!-- Login / Register Button -->
-                    <li>
-                        <a href="login.html">Login / Register</a>
-                    </li>
+
                     <!-- User dropdown -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="userProfile.html">My Profile</a>
-                            </li>
-                            <li>
-                                <a href="orderHistory.html">Order History</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="uploadDesign.html">Upload Design</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="#">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
+
                     <!-- Shopping Cart -->
-                    <li id="shoppingCart">
-                        <a href="cart.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart </a>
-                    </li>
+
                 </ul>
                 <!-- Search bar -->
                 <form action="" class="navbar-form navbar-right" role="search">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Search">
+                        <input id="searchBar" type="text" class="form-control" placeholder="Search">
                     </div>
                     <button type="submit" class="btn btn-primary">
                         <span class="glyphicon glyphicon-search"></span>
@@ -72,266 +49,169 @@
             </div> <!-- navbar -->
         </div> <!-- Container -->
     </nav>
-</header>
+    </header>
 
-<!-- Page Content -->
-<p></p>
-<!-- BEGIN CONTAINER -->
-<div class="page-container">
-    <!-- BEGIN SIDEBAR -->
-    <div class="page-sidebar-wrapper">
-        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
-        <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
-        <div class="page-sidebar navbar-collapse collapse">
-            <!-- BEGIN PAGE CONTENT-->
-            <div class="row margin-top-20">
-                <div class="col-md-12">
-                    <!-- BEGIN PROFILE SIDEBAR -->
-                    <div class="profile-sidebar">
-                        <!-- PORTLET MAIN -->
-                        <div class="portlet light profile-sidebar-portlet">
-                            <!-- SIDEBAR USERPIC -->
-                            <div class="profile-userpic">
-                                <img src="http://lorempixel.com/output/people-h-c-420-480-6.jpg" class="img-responsive" alt="">
-                            </div>
-                            <!-- END SIDEBAR USERPIC -->
-                            <!-- SIDEBAR USER TITLE -->
-                            <div class="profile-usertitle">
-                                <div class="profile-usertitle-name">
-                                    Marcus Doe
-                                </div>
-                                <div class="profile-usertitle-job">
-                                    Developer
-                                </div>
-                            </div>
-                            <!-- END SIDEBAR USER TITLE -->
-                            <!-- SIDEBAR BUTTONS -->
-                            <div class="profile-userbuttons">
-                                <button type="button" class="btn btn-circle green-haze btn-sm">Follow</button>
-                                <button type="button" class="btn btn-circle btn-danger btn-sm">Message</button>
-                            </div>
-                            <!-- END SIDEBAR BUTTONS -->
-                            <!-- SIDEBAR MENU -->
-                            <div class="profile-usermenu">
-                                <ul class="nav">
-                                    <li class="active">
-                                        <a href="userProfile.html">
-                                            <i class="icon-home"></i>
-                                            Overview </a>
-                                    </li>
-                                    <li>
-                                        <a href="profile.html">
-                                            <i class="icon-settings"></i>
-                                            Account Settings </a>
-                                    </li>
-                                    <li>
-                                        <a href="extra_profile_help.html">
-                                            <i class="icon-info"></i>
-                                            Help </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <!-- END MENU -->
-                        </div>
-                        <!-- END PORTLET MAIN -->
-                        <!-- PORTLET MAIN -->
-                        <div class="portlet light">
-                            <div>
-                                <h4 class="profile-desc-title">About Marcus Doe</h4>
-                                <span class="profile-desc-text"> Lorem ipsum dolor sit amet diam nonummy nibh dolore. </span>
-                                <div class="margin-top-20 profile-desc-link">
-                                    <i class="fa fa-globe"></i>
-                                    <a href="http://www.mypage.com">www.mypage.com</a>
-                                </div>
-                                <div class="margin-top-20 profile-desc-link">
-                                    <i class="fa fa-twitter"></i>
-                                    <a href="http://www.twitter.com/mytwitter/">@mytwitter</a>
-                                </div>
-                                <div class="margin-top-20 profile-desc-link">
-                                    <i class="fa fa-facebook"></i>
-                                    <a href="http://www.facebook.com/myfaceboook/">myfacebook</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- END PORTLET MAIN -->
-                    </div>
-                    <!-- END BEGIN PROFILE SIDEBAR -->
-                    <!-- BEGIN PROFILE CONTENT -->
-                    <div class="profile-content">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="portlet light">
-                                    <div class="portlet-title tabbable-line">
-                                        <div class="caption caption-md">
-                                            <i class="icon-globe theme-font hide"></i>
-                                            <span class="caption-subject font-blue-madison bold uppercase">Profile Account</span>
-                                        </div>
-                                        <ul class="nav nav-tabs">
-                                            <li class="active">
-                                                <a href="#tab_1_1" data-toggle="tab">Personal Info</a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab_1_2" data-toggle="tab">Change Avatar</a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab_1_3" data-toggle="tab">Change Password</a>
-                                            </li>
-                                            <li>
-                                                <a href="#tab_1_4" data-toggle="tab">Privacy Settings</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="portlet-body">
-                                        <div class="tab-content">
-                                            <!-- PERSONAL INFO TAB -->
-                                            <div class="tab-pane active" id="tab_1_1">
-                                                <form role="form" action="#">
-                                                    <div class="form-group">
-                                                        <label class="control-label">First Name</label>
-                                                        <input type="text" placeholder="" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Last Name</label>
-                                                        <input type="text" placeholder="" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Mobile Number</label>
-                                                        <input type="text" placeholder="" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Interests</label>
-                                                        <input type="text" placeholder="" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Occupation</label>
-                                                        <input type="text" placeholder="" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">About</label>
-                                                        <textarea class="form-control" rows="3" placeholder=""></textarea>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Website Url</label>
-                                                        <input type="text" placeholder="" class="form-control">
-                                                    </div>
-                                                    <div class="margiv-top-10">
-                                                        <a href="javascript:;" class="btn green-haze">
-                                                            Save Changes </a>
-                                                        <a href="javascript:;" class="btn default">
-                                                            Cancel </a>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <!-- END PERSONAL INFO TAB -->
-                                            <!-- CHANGE AVATAR TAB -->
-                                            <div class="tab-pane" id="tab_1_2">
-                                                <p>
-                                                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod.
-                                                </p>
-                                                <form action="#" role="form">
-                                                    <div class="form-group">
-                                                        <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                            <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                                <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="">
-                                                            </div>
+    <!-- Page Content -->
+    <div class="container">
 
-                                                            <div>
-																<span class="btn default btn-file">
+        <!-- Breadcumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">User Profile</h1>
+                <ol class="breadcrumb">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="userProfile.html">User Profile</a></li>
+                    <li class="active">Edit Profile</li>
+                </ol>
+            </div> <!-- col-lg-12 -->
+        </div> <!-- breadcrumbs Row -->
 
-
-																<input type="file" name="...">
-																</span>
-                                                                <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput">
-                                                                    Remove </a>
-                                                            </div>
-                                                        </div>
-                                                        <div class="clearfix margin-top-10">
-                                                        </div>
-                                                    </div>
-                                                    <div class="margin-top-10">
-                                                        <a href="javascript:;" class="btn green-haze">
-                                                            Submit </a>
-                                                        <a href="javascript:;" class="btn default">
-                                                            Cancel </a>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <!-- END CHANGE AVATAR TAB -->
-                                            <!-- CHANGE PASSWORD TAB -->
-                                            <div class="tab-pane" id="tab_1_3">
-                                                <form action="#">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Current Password</label>
-                                                        <input type="password" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">New Password</label>
-                                                        <input type="password" class="form-control">
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="control-label">Re-type New Password</label>
-                                                        <input type="password" class="form-control">
-                                                    </div>
-                                                    <div class="margin-top-10">
-                                                        <a href="javascript:;" class="btn green-haze">
-                                                            Change Password </a>
-                                                        <a href="javascript:;" class="btn default">
-                                                            Cancel </a>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                            <!-- END CHANGE PASSWORD TAB -->
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END PROFILE CONTENT -->
+        <!-- Edit profile row -->
+        <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="row">
+            <!-- SideBar for user info -->
+            <div class="col-md-4">
+                <div class="userEdit-frame well container-fluid">
+                <div id="userName"><h3>Ironman</h3>
                 </div>
+
+                <div class="avatar" id="avatar-edit">
+                    <img src="img/avatar/ironman-av.jpg" alt="" />
+                </div> <!-- Avatar div -->
+
+                <div id="user-flname">
+                    <h4>Tony Stark</h4>
+                    <h5>New York</h5>
+                </div>
+                <hr>
+                <div id="user-about">
+                    <h5>About me:</h5>
+                    <h5>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus tenetur vel laudantium sint ipsa aliquid, voluptas possimus incidunt assumenda cupiditate dolores dignissimos. Iusto impedit quo, deserunt odio, quam asperiores pariatur.</h5>
+                </div>
+                <hr>
+                <div id="user-social">
+                    <h4>Follow me!</h4>
+                    <a class="btn btn-social-icon btn-facebook">
+                        <span class="fa fa-facebook"></span>
+                    </a>
+                    <a class="btn btn-social-icon btn-twitter">
+                        <span class="fa fa-twitter"></span>
+                    </a>
+                    <a class="btn btn-social-icon btn-google">
+                        <span class="fa fa-google-plus"></span>
+                    </a>
+                    <a class="btn btn-social-icon btn-instagram">
+                        <span class="fa fa-instagram"></span>
+                    </a>
+                    <a class="btn btn-social-icon btn-linkedin">
+                        <span class="fa fa-linkedin"></span>
+                    </a>
+                </div>
+                </div> <!-- user info frame -->
             </div>
-            <!-- END PAGE CONTENT-->
+
+            <!-- Nav tab for edit settings -->
+            <div class="col-md-8">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#menu0">Personal Info</a></li>
+                    <li><a data-toggle="tab" href="#menu1"> Change Avatar </a></li>
+                    <li><a data-toggle="tab" href="#menu2"> Change Password </a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <!-- Personal Info -->
+                    <div id="menu0" class="tab-pane fade in active"> <br>
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="fname">First Name:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="fname" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="lname">Last Name:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="lname" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="email">Email:</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="email" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="city">City:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="city" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="adress">Adress:</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="address" placeholder="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-3" for="aboutme">About me:</label>
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" id="aboutme" rows="5"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-success pull-right">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div> <!-- tab pane -->
+
+                    <!-- Change Avatar -->
+                    <div id="menu1" class="tab-pane fade">
+
+                    </div> <!-- tab pane -->
+
+                    <!-- Change Password -->
+                    <div id="menu2" class="tab-pane fade"> <br>
+                        <div class="col-md-8 col-md-offset-2">
+                        <form class="form-horizontal" role="form">
+                            <div class="form-group">
+                                <label for="old-password">Current Password:</label>
+                                <input type="password" class="form-control" id="old-password" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">New Password:</label>
+                                <input type="password" class="form-control" id="new-password" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                <label for="renew-password">Retype new Password:</label>
+                                <input type="password" class="form-control" id="renew-password" placeholder="">
+                            </div>
+                            <div class="form-group">
+                                    <button type="submit" class="btn btn-success pull-right">Submit</button>
+                            </div>
+                        </div>
+                        </form>
+                    </div> <!-- Change password tab -->
+                </div> <!-- Tab content -->
+            </div>
+            </div>
+
         </div>
-    </div>
-    <!-- END CONTENT -->
-</div>
-<!-- END CONTAINER -->
+        </div>
 
 
+    </div><!-- Main Container -->
+
+<footer></footer>
 </body>
-<script src="js/salvattore.min.js"></script>
+<script src="js/navButtons.js"></script>
 <script type="text/javascript">
-    $(document).on('ready',function() {
+$(document).on('ready',function() {
 
-        // Setting the action to get user session
-        $.ajax({
-            type: 'POST',
-            url: 'data/applicationLayer.php',
-            dataType: 'json',
-            data: {'action':'GET_SES'},
-            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-            success: function(jsonData) {
-                var navButtons = '<li class="dropdown">' +
-                        '<a href="#" class="dropdown-toggle"' + 'data-toggle="dropdown"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span> User <b class="caret"></b></a>' +
-                        '<ul class="dropdown-menu">'+
-                        '<li><a href="userProfile.html">My Profile</a></li>'
-                '<li><a href="orderHistory.html">Order History</a></li>' +
-                '<li class="divider"></li>' +
-                '<li><a href="uploadDesign.html">Upload Design</a></li>' +
-                '<li class="divider"></li>' +
-                '<li><a href="#">Logout</a></li></ul></li>' +
-                '<li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Cart </a></li>'
 
-                $("#navRightButtons").html(navButtons);
-            },
-            error: function(errorMsg){
-                var navButtons = '<li><a href="login.html">Login / Register</a></li>'
-
-                $("#navRightButtons").html(navButtons);
-            }
-        });
-
-    });
+});
 </script>
 
 </html>

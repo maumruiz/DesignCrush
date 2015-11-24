@@ -79,9 +79,26 @@
   height: inherit;
 }
 
+#avatar-edit
+{
+    width: 100px;
+    height: 100px;
+}
+
+.userInfo-frame, .userEdit-frame
+{
+    padding-bottom: 30px;
+    margin-bottom: 30px
+}
+
 #userName, #user-flname, #user-social
 {
     text-align: center;
+}
+
+#user-about
+{
+    text-align: justify;
 }
 
 #designImage a
