@@ -1,5 +1,5 @@
 <?php 
-$carpetaAdjunta="imagenes_/";
+$carpetaAdjunta="img/designs/";
 
 if($_SERVER['REQUEST_METHOD']=="DELETE"){
 

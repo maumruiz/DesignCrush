@@ -1,5 +1,5 @@
 <?php 
-$carpetaAdjunta="imagenes_/";
+$carpetaAdjunta="img/designs/";
 // Contar envían por el plugin
 $Imagenes =count(isset($_FILES['imagenes']['name'])?$_FILES['imagenes']['name']:0);
 $infoImagenesSubidas = array();
