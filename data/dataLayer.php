@@ -245,6 +245,74 @@
         }
     }
 
+    # Query to get all the info about the user
+    # Needs the userName from the Application layer
+    function getUserInfoDB($userName)
+    {
+        $conn = connect();
+
+        if($conn != null)
+        {
+            $sql = "SELECT * FROM User WHERE userName = '$userName'";
+            $result = $conn->query($sql);
+
+            if($result->num_rows > 0)
+            {
+                while($row = $result->fetch_assoc())
+                {
+                    $conn->close();
+                    $data[]=array_map('utf8_encode', $row);
+                    return $response = array('message' => 'OK', 'data' => $data);
+                }
+            }
+            else
+            {
+                return array('message' => 'NONE');
+            }
+        }
+        else
+        {
+            $conn->close();
+            return errors(500);
+        }
+    }
+
+    # Query to get all the info about the user
+    # Needs the userName from the Application layer
+    function getUserDesignsDB($userName)
+    {
+        $conn = connect();
+
+        if($conn != null)
+        {
+            $sql = "SELECT * FROM Design WHERE userName = '$userName'";
+            $result = $conn->query($sql);
+
+            if($result->num_rows > 0)
+            {
+                $data = array();
+                while($row = $result->fetch_assoc())
+                {
+                    array_push($data,array('designId' => $row['designId'], 'designName' => $row['designName']));
+                }
+
+                $response = array('message' => 'OK', 'data' => $data);
+                $conn->close();
+                return $response;
+            }
+            else
+            {
+                return array('message' => 'NONE');
+            }
+        }
+        else
+        {
+            $conn->close();
+            return errors(500);
+        }
+    }
+
+
     # Query to get all the info about a product
     # Needs the designId from the Application layer
     function getCompleteProductDB($productName)
@@ -436,6 +504,41 @@
 		}
 	}
 
+    #Query to modify user data
+    function setUserInfoDB($userName, $fName, $lName, $email, $city, $address, $aboutme)
+	{
+		$conn = connect();
+		if($conn != null)
+		{
+            echo $userName;
+            echo $fName;
+            echo $lName;
+            echo $email;
+            echo $city;
+            echo $address;
+            echo $aboutme;            
+
+
+			$sql = "UPDATE User SET fName='$fName', lName='$lName', email='$email', city='$city', address='$address', aboutMe='$aboutme' WHERE userName='$userName'";
+
+			if(mysqli_query($conn, $sql))
+			{
+                $conn->close();
+                return array("status" => "COMPLETE");
+			}
+			else
+			{
+				$conn->close();
+				return errors(409);
+			}
+		}
+		else
+		{
+			$conn->close();
+			return errors(500);
+		}
+	}
+
     # Query to delete a single order from the Cart in the Database
     # Needs the orderId from the Application layer
     function deleteItemFromCartDB($orderId)
@@ -498,7 +601,7 @@
 		$conn = connect();
 		if($conn != null)
 		{
-			$sql = "INSERT INTO Design(designId, userName, designName, description, price) VALUES ('$designId', '$userName', '$designName', '$description', '$price')";
+			$sql = "INSERT INTO Design(designId, userName, designName, description, pricePercent) VALUES ('$designId', '$userName', '$designName', '$description', '$price')";
 
 			if(mysqli_query($conn, $sql))
 			{

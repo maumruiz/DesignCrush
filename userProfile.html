@@ -72,21 +72,18 @@
                 <br><br><hr>
 
                 <div class="userInfo-frame bg-success container-fluid" style="padding-bottom: 30px">
-                <div id="userName"><h2>Ironman</h2>
-                </div>
+                <div id="userName"></div>
 
-                <div class="avatar">
-                    <img src="img/avatar/ironman-av.jpg" alt="" />
+                <div id="user-avatar" class="avatar">
+
                 </div> <!-- Avatar div -->
 
                 <div id="user-flname">
-                    <h3>Tony Stark</h3>
-                    <h4>New York</h4>
+
                 </div>
                 <hr>
                 <div id="user-about">
-                    <h4>About me:</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus tenetur vel laudantium sint ipsa aliquid, voluptas possimus incidunt assumenda cupiditate dolores dignissimos. Iusto impedit quo, deserunt odio, quam asperiores pariatur.</p>
+
                 </div>
                 <hr>
                 <div id="user-social">
@@ -125,6 +122,7 @@
                     </div> <!-- row gallery -->
 
                 <!-- Pagination -->
+                <!--
                 <div class="row text-center">
                     <div class="col-md-12">
                         <ul class="pagination">
@@ -149,9 +147,9 @@
                             <li>
                                 <a href="#">&raquo;</a>
                             </li>
-                        </ul>
-                    </div> <!-- col-lg-12 -->
-                    </div> <!-- row -->
+                        </ul> -->
+                    <!--  </div> --><!-- col-lg-12 -->
+                    <!-- </div> --> <!-- row -->
                 </div> <!-- Panel body -->
                 </div> <!-- Panel -->
             </div> <!-- Gallery column -->
@@ -167,7 +165,68 @@
 <script src="js/salvattore.min.js"></script>
 <script type="text/javascript">
 $(document).on('ready',function() {
+    // Setting the action to get user info from session
+    $.ajax({
+        type: 'POST',
+        url: 'data/applicationLayer.php',
+        dataType: 'json',
+        data: {'action':'GET_USER'},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        success: function(jsonData) {
+            var userName = '<h2>' + jsonData.data[0].userName + '</h2>';
+            var flname = '<h3>' + jsonData.data[0].fName + jsonData.data[0].lName + '</h3>';
 
+            if(jsonData.data[0].avatar){
+                var userAvatar = '<img src="img/avatar/' + jsonData.data[0].avatar + '" alt="" />';
+            } else
+            { var userAvatar = '<img src="img/admin/usericon.png" alt="" />'}
+
+            if(jsonData.data[0].city){
+                var city = '<h4>' + jsonData.data[0].city + '</h4>';
+            } else
+            { var city = ' '}
+
+            if(jsonData.data[0].aboutMe){
+                var aboutMe = '<h4>About me:</h4><p>' + jsonData.data[0].aboutMe + '</p>';
+            } else
+            { var aboutMe = ' '}
+
+            $("#userName").html(userName);
+            $("#user-flname").html(flname + city);
+            $("#user-avatar").html(userAvatar);
+            $("#user-about").html(aboutMe);
+        },
+        error: function(errorMsg){
+            console.log(errorMsg);
+        }
+    });
+
+    // Setting the action to get user designs
+    $.ajax({
+        type: 'POST',
+        url: 'data/applicationLayer.php',
+        dataType: 'json',
+        data: {'action':'USER_DESIGNS'},
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        success: function(jsonData) {
+
+            var grid = document.querySelector('#columns');
+            var item = document.createElement('article');
+
+            var gallery = "";
+
+            for(i = 0; i < jsonData.data.length; i++) {
+                salvattore.appendElements(grid, [item]);
+                item.outerHTML = '<a class="" href="designPage.html">' +
+                        '<img class="img-responsive" src="img/designs/' + jsonData.data[i].designId + '" alt="' + jsonData.data[i].designId + '"></a>';
+            }
+
+        },
+        error: function(errorMsg){
+            $("#carouselForPopulars").html("");
+            alert(errorMsg.statusText);
+        }
+    });
 
 });
 </script>

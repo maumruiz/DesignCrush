@@ -57,7 +57,7 @@
         <!-- Breadcumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">User Profile</h1>
+                <h1 class="page-header">Edit Profile</h1>
                 <ol class="breadcrumb">
                     <li><a href="home.html">Home</a></li>
                     <li><a href="userProfile.html">User Profile</a></li>
@@ -122,17 +122,17 @@
                 <div class="tab-content">
                     <!-- Personal Info -->
                     <div id="menu0" class="tab-pane fade in active"> <br>
-                        <form class="form-horizontal" role="form">
+                        <form class="form-horizontal" role="form" id="personal-info">
                             <div class="form-group">
                                 <label class="control-label col-sm-3" for="fname">First Name:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="fname" placeholder="">
+                                    <input type="text" class="form-control" id="first-name">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-sm-3" for="lname">Last Name:</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" id="lname" placeholder="">
+                                    <input type="text" class="form-control" id="last-name" placeholder="">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -148,7 +148,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="control-label col-sm-3" for="adress">Adress:</label>
+                                <label class="control-label col-sm-3" for="address">Address:</label>
                                 <div class="col-sm-9">
                                     <input type="text" class="form-control" id="address" placeholder="">
                                 </div>
@@ -210,7 +210,54 @@
 <script type="text/javascript">
 $(document).on('ready',function() {
 
+    $("#personal-info").submit(function( event ) {
+        var fName, lName, email, city, address, aboutme;
 
+        fName = $('#first-name').val();
+        lName = $('#last-name').val();
+        email = $('#email').val();
+        city = $('#city').val();
+        address = $('#address').val();
+        aboutme = $('#aboutme').val();
+
+        // Validate the inputs, they must contain something
+        if (fName != "" && lName != "" && email != "" && city != "" && address != "" && aboutme != "")
+        {
+            var jsonObject = {
+                'fName' : fName,
+                'lName' : lName,
+                'email' : email,
+                'city' : city,
+                'address' : address,
+                'aboutme': aboutme,
+                'action' : 'SET_UINFO'
+            };
+            console.log(jsonObject.aboutme);
+            console.log(jsonObject.action);
+
+            console.log(jsonObject);
+
+            $.ajax({
+                type: 'POST',
+                url: 'data/applicationLayer.php',
+                dataType: 'json',
+                data: jsonObject,
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                success: function(jsonData) {
+                    window.location.replace('userProfile.html');
+                },
+                error: function(errorMsg){
+                    alert(errorMsg.statusText);
+                    event.preventDefault();
+                }
+            });
+        }
+        else
+        {
+            alert('You must fill up all the inputs.');
+            event.preventDefault();
+        }
+    });
 });
 </script>
 

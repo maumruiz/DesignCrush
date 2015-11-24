@@ -32,7 +32,7 @@
                               break;
         case 'PRODUCT':       getCompleteProduct();
                               break;
-        case 'GET_CART':       getUserCart();
+        case 'GET_CART':      getUserCart();
                               break;
         case 'ADD_CART':      addItemsToCart();
                               break;
@@ -47,6 +47,14 @@
         case 'COMMENT':       commentDesign();
                               break;
         case 'GET_COMMENT':   getCommentsOfDesign();
+                              break;
+        case 'ADD_FILE':      addDesignFile();
+                              break;
+        case 'GET_USER':      getUserInfo();
+                              break;
+        case 'USER_DESIGNS':  getUserDesigns();
+                              break;
+        case 'SET_UINFO':     setUserInfo();
                               break;
 	}
 
@@ -336,6 +344,106 @@
     	}
     }
 
+    # Action to get the whole user info
+    function getUserInfo()
+    {
+        session_start();
+    	if (isset($_SESSION['userName']))
+    	{
+            $result = getUserInfoDB($_SESSION['userName']);
+
+            if($result['message'] == 'OK')
+            {
+                # All the info of the design
+                echo json_encode($result);
+            }
+            else
+            {
+                if($result['message'] == 'NONE')
+                {
+                    # No designs with that designId
+                    echo json_encode($result);
+                }
+                else
+                {
+                    # Error
+                    die(json_encode($result));
+                }
+            }
+    	}
+    	else
+    	{
+    		echo json_encode(errors(417));
+    	}
+    }
+
+    # Action to get set some user info
+    function setUserInfo()
+    {
+        session_start();
+    	if (isset($_SESSION['userName']))
+    	{
+            $fName =  $_POST['fName'];
+            $lName =  $_POST['lName'];
+            $email =  $_POST['email'];
+            $city =  $_POST['city'];
+            $address =  $_POST['address'];
+            $aboutme =  $_POST['aboutme'];
+
+
+            $result = setUserInfoDB($_SESSION['userName'], $fName, $lName, $email, $city, $address, $aboutme);
+
+            if($result['message'] == 'OK')
+            {
+                # All the info of the design
+                echo json_encode($result);
+            }
+            else
+            {
+                # Error
+                die(json_encode($result));
+            }
+    	}
+    	else
+    	{
+    		echo json_encode(errors(417));
+    	}
+    }
+
+    # Action to get the user designs
+    function getUserDesigns()
+    {
+        session_start();
+    	if (isset($_SESSION['userName']))
+    	{
+            $result = getUserDesignsDB($_SESSION['userName']);
+
+            if($result['message'] == 'OK')
+            {
+                # All the info of the design
+                echo json_encode($result);
+            }
+            else
+            {
+                if($result['message'] == 'NONE')
+                {
+                    # No designs with that designId
+                    echo json_encode($result);
+                }
+                else
+                {
+                    # Error
+                    die(json_encode($result));
+                }
+            }
+    	}
+    	else
+    	{
+    		echo json_encode(errors(417));
+    	}
+    }
+
+
     # Action to get the whole product info
     # Neeeds the productId from the session
     function getCompleteProduct()
@@ -550,22 +658,20 @@
     # Action to upload a design
     # Needs the designName, the price given by the user for that design and the description from the front-end
     # Return a json with the designId to use it to save the image in the corresponding folder
-    function uploadDesign()
+    function uploadDesign($designId)
     {
 		session_start();
 		if(isset($_SESSION['userName']))
 		{
-            $designFileName = $_POST['designFileName'];
             $designName = $_POST['designName'];
             $price =  $_POST['price'];
             $description =  $_POST['description'];
-            $designId = uniqid() . "_" . $designFileName;
 
 			$result = uploadDesignDB($designId, $_SESSION['userName'], $designName, $description, $price);
 
 			if($result['status'] == 'COMPLETE')
 			{
-				echo json_encode($result);
+				return $result;
 			}
 			else
 			{
@@ -638,5 +744,72 @@
         }
     }
 
+    function addDesignFile()
+    {
+        // 'images' refers to your file input name attribute
+        if (empty($_FILES['images'])) {
+            echo json_encode(['error'=>'No files found for upload.']);
+            // or you can throw an exception
+            return; // terminate
+        }
+
+        // get the files posted
+        $images = $_FILES['images'];
+
+        // get user id posted
+        //$userid = empty($_POST['userid']) ? '' : $_POST['userid'];
+
+        // get user name posted
+        //$username = empty($_POST['username']) ? '' : $_POST['username'];
+
+        // a flag to see if everything is ok
+        $success = null;
+
+        // file paths to store
+        $paths= [];
+
+        // get file names
+        $filenames = $images['name'];
+
+        // loop and process files
+        for($i=0; $i < count($filenames); $i++){
+            $ext = explode('.', basename($filenames[$i]));
+            $fileNewName = md5(uniqid()) . "." . array_pop($ext);
+            $target = "../img/designs" . DIRECTORY_SEPARATOR . $fileNewName;
+            if(move_uploaded_file($images['tmp_name'][$i], $target)) {
+                $success = true;
+                $paths[] = $target;
+            } else {
+                $success = false;
+                break;
+            }
+        }
+
+        // check and process based on successful status
+        if ($success === true) {
+            // call the function to save all data to database
+            // code for the following function `save_data` is not
+            // mentioned in this example
+            uploadDesign($fileNewName);
+
+            // store a successful response (default at least an empty array). You
+            // could return any additional response info you need to the plugin for
+            // advanced implementations.
+            $output = ['newName'=>$fileNewName];
+            // for example you can get the list of files uploaded this way
+            // $output = ['uploaded' => $paths];
+        } elseif ($success === false) {
+            $output = ['error'=>'Error while uploading images. Contact the system administrator'];
+            // delete any uploaded files
+            foreach ($paths as $file) {
+                unlink($file);
+            }
+        } else {
+            $output = ['error'=>'No files were processed.'];
+        }
+
+        // return a json encoded response for plugin to process successfully
+        echo json_encode($output);
+    }
 
 ?>
