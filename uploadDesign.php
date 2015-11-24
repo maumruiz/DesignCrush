@@ -78,7 +78,7 @@
 	<input id="archivos" name="imagenes[]" type="file" multiple=true class="file-loading">
 	</body>
 	<?php 	
-	$directory = "imagenes_/";      
+	$directory = "img/designs/";      
 	$images = glob($directory . "*.*");
 	?>
 	
