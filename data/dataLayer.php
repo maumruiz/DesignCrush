@@ -285,7 +285,7 @@
 
         if($conn != null)
         {
-            $sql = "SELECT * FROM Design WHERE userName = '$userName'";
+            $sql = "SELECT * FROM Design WHERE userName = '$userName' ORDER BY uploadDate DESC";
             $result = $conn->query($sql);
 
             if($result->num_rows > 0)
@@ -516,7 +516,7 @@
             echo $email;
             echo $city;
             echo $address;
-            echo $aboutme;            
+            echo $aboutme;
 
 
 			$sql = "UPDATE User SET fName='$fName', lName='$lName', email='$email', city='$city', address='$address', aboutMe='$aboutme' WHERE userName='$userName'";
